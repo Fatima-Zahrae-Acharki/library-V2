@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>LIBRARY</title>
+</head>
+<body>
+    <div class="cont">
+        <h1 class="lib">
+            <br>
+            SO<span class="text">Library</span>
+        </h1>
+        <br><br>
+        <br><br><br>
+        <form id="form" onsubmit="event.preventDefault();  "   autocomplete="off">
+            <br><br><br><br><br>
+            <div id="ta">
+            
+                <div class="grp">
+                    <div><p id="error1"></p></div>
+                    <label for="title">Title</label>
+                    <br>
+                    <input type="text" id="title"  >
+                </div>
+                
+
+                <div class="grp1">
+                    <div><p id="error2"></p></div>
+                    <label for="author">Author</label>
+                    <br>
+                    <input type="text" id="author"  >
+                </div>
+            </div>
+            <div id="pp">
+                <div class="grp2">
+                    <div><p id="error3"></p></div>
+                    <label for="price">Price</label>
+                    <br>
+                    <input type="number" id="price" >
+                </div>
+
+                <div class="grp3">
+                    <div><p id="error4"></p></div>
+                    <label for="publication date">Publication date</label>
+                    <br>
+                    <input type="date" id="pub" >
+                </div>
+            </div>
+            <div id="tg">
+                <div class="grp4">
+                    <div><p id="error5"></p></div>
+                <label for="language">Language</label>
+                <br>
+                    <select class="form-control"  id="language" >
+                        <option selected="selected" value="" disabled="">Select the Language </option>
+                        <option value="english">ENGLISH</option>
+                        <option value="arabic">ARABIC</option>
+                        <option value="french">FRENCH</option>
+                    </select>
+                        
+                
+
+                </div>
+                <div class="grp5">
+                    <div><p id="error6"></p></div>
+                    <p>Genre</p>
+                    <br>
+                    <div id="fshc">
+                        <div id="fs">
+                            <input type="radio" id="genre1" name="fav_language" value="Fantacy" class="f">
+                            <label for="genre">Fantacy</label><br>
+
+                            <input type="radio" id="genre2" name="fav_language" value="Science-fiction" class="f">
+                            <label for="genre">Science-fiction</label><br>
+                        </div>
+
+                        <div id="hc">
+                            <input type="radio" id="genre3" name="fav_language" value="Horror" class="f">
+                            <label for="genre">Horror</label><br>
+
+                            <input type="radio" id="genre4" name="fav_language" value="Crime and mystery" class="f">
+                            <label for="genre">Crime-mystery</label><br>
+                        </div>
+                    </div>
+                    <div id="sefm">
+                        <div id="se">
+                            <input type="radio" id="genre5" name="fav_language" value="Supernatural" class="f">
+                            <label for="genre">Supernatural</label><br>
+
+                            <input type="radio" id="genre6" name="fav_language" value="Epic novel" class="f">
+                            <label for="genre">Epic novel</label><br>
+                        </div>
+
+                        <div id="fm">
+                            <input type="radio" id="genre7" name="fav_language" value="Fable" class="f">
+                            <label for="genre">Fable</label><br>
+
+                            <input type="radio" id="genre8" name="fav_language" value="Music score" class="f">
+                            <label for="genre">Music score</label><br>
+                        </div>
+                    </div>
+
+                    <div id="a">
+                        <input type="radio" id="genre9" name="fav_language" value="Arabe poetry" class="f">
+                        <label for="genre">Arabe poetry</label><br>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="em">
+                <div class="grp6">
+                    <div><p id="error7"></p></div>
+                    <label for="email">Email</label>
+                    <br>
+                    <input type="text" id="email" >
+                </div>
+               
+            </div>
+
+
+            <!-- <div class="btn"></div> -->
+            <div id="add">
+                <input type="submit" value="ADD BOOK" id="btn">
+                <!-- <button type="reser" value="RESET" >RESET</button> -->
+            </div>
+            
+        </form>
+        <br><br><br><br><br><br>
+        <table id="table">
+             <thead id="thd">
+                <tr id="tro">
+                    
+                    <th >Title</th>
+                    <th >Author</th>
+                    <th >Price</th>
+                    <th >Publication date</th>
+                    <th >Language</th>
+                    <th >Genre</th>
+                    <th>Email</th>
+                    <th >-</th>
+                </tr>
+                
+            </thead>
+            <tbody id="book-list">
+
+            </tbody>
+        </table>
+        
+        <div id="print">
+            <!-- <input type="button" value="PRINT" id="pr" onclick="pr()"> -->
+            <button type="" value="" id="pr">Print</button>
+        </div>
+
+    </div>
+        
+    
+
+    <script src="sc.js"></script>
+</body>
+</html>

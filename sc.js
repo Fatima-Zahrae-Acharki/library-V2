@@ -79,7 +79,7 @@ function formValidation() {
 
     // price
     // var  regexPrice=/^((\d{1,3}|\s){1})((,\d{3}|\d))(\s|.(\d{2}))$/
-    var regexPrice=/^((\d+\.{0.1}))$/
+    var regexPrice=/^[0-9]+\.[0-9]{2}$/;
     message = []
     if(price.value === '' ) {
         message.push('please enter the price*')
@@ -187,11 +187,11 @@ function resetForm() {
     document.getElementById("price").value = "";
     document.getElementById("pub").value = "";
     document.getElementById("language").value = "";
-    document.getElementById("genre").value = "";
+    document.querySelector('input[name="fav_language"]:checked').checked = false;
 }
 
 function loadData() {
-    tbody.innerHTML=""
+    tbody.innerHTML = ""
     
     for(i=0; i< StoredBooks.length; i++){
         var newRow = tbody.insertRow();
@@ -221,6 +221,27 @@ function loadData() {
         cell7.innerHTML =  `<button onClick='onEdit(this)'>Edit</button>
         <button onClick='onDelete(this)'>Delete</button>`;
     }
+    //sort items
+    function tri(){
+        // StoredBooks.sort(function(book1, book2){
+        //     if(book1.title.toUpperCase()<book2.title.toUpperCase()){
+        //         return 1;
+        //     }
+        //     else if(book1.title.toUpperCase()<book2.title.toUpperCase()){
+        //         return -1;
+        //     }
+        //     else{
+        //         return 0;
+        //     }
+
+        // });
+        listBook.sort(function (a,b){
+            if(a.Title.toUpperCase()<b.title.toUpperCase()){
+            return -1 };
+        })
+        
+
+    }
 }
 
 // insert new row in html table
@@ -231,6 +252,7 @@ function insertNewRecord() {
     localStorage.setItem("listBook", JSON.stringify(StoredBooks));
     loadData();
 }
+
 
 // edit row
 function onEdit(td) {
@@ -260,18 +282,18 @@ function updateRecord(formData) {
 // when u want to delete ur infos
 function onDelete(td) {
     if(confirm('do u really want to delete this ?')){
-        row = td.parentElement.parentElement;
-        document.getElementById("table").deleteRow(row.rowIndex);
-    }
-    
-    function insertNewRecord() {
-        var genreSelected = document.querySelector('input[name="fav_language"]:checked').value;
-        var newBook = new Book(title.value, author.value, price.value, pub.value, language.value, genreSelected, email.value );
-        StoredBooks.push(newBook);
-        localStorage.setItem("listBook", JSON.stringify(StoredBooks));
+        var row = td.parentElement.parentElement.rowIndex-1;
+        StoredBooks.splice(row, 1);
+        tri();
+        localStorage.setItem("listBook", JSON.stringify(StoredBooks))
         loadData();
+
+        
     }
-    resetForm();
+    //resetForm();
+
+
+    
 }
 
 // on form submit

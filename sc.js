@@ -14,7 +14,8 @@ const errorElementLanguage = document.getElementById('error5')
 const errorElementGenre = document.getElementById('error6')
 const errorElementEmail = document.getElementById('error7')
 const tbody = document.getElementById("book-list")
-const pr = document.getElementById('pr')
+const details = document.getElementById('details')
+// const pr = document.getElementById('pr')
 var StoredBooks = []
 var noValid = 0
 var selectedRow = null
@@ -30,9 +31,11 @@ class Book {
         this.genre = genre;
         this.email = email;
     }
-
+ 
     DetailOuvrage() {
-        return ("the" + title + "book is a" + genre + "in" + language  + "written by" + author +  "and published on" + pub + ". The price of" + title+ ", is"  + price + "DHs")
+        // return ("the" + title + "book is a" + genre + "in" + language  + "written by" + author +  "and published on" + pub + ". The price of" + title+ ", is"  + price + "DHs")
+        return(`The ${this.title} book is a ${this.genre}  in ${this.language} written by  ${this.author}  and published on ${this.pub} . The price of ${this.title}  is  ${this.price} DHs.`)
+        
     }
 }
 
@@ -45,6 +48,7 @@ if(listBook!=null){
         var ouvrage = new Book(listBook[i].title, listBook[i].author, listBook[i].price, listBook[i].pub, listBook[i].language, listBook[i].genre, listBook[i].email);
         StoredBooks.push(ouvrage);
     }
+    tri()
     loadData();
 }
 
@@ -188,7 +192,9 @@ function resetForm() {
     document.getElementById("pub").value = "";
     document.getElementById("language").value = "";
     document.querySelector('input[name="fav_language"]:checked').checked = false;
+    document.getElementById("email").value = "";
 }
+
 
 function loadData() {
     tbody.innerHTML = ""
@@ -221,49 +227,56 @@ function loadData() {
         cell7.innerHTML =  `<button onClick='onEdit(this)'>Edit</button>
         <button onClick='onDelete(this)'>Delete</button>`;
     }
-    //sort items
-    function tri(){
-        // StoredBooks.sort(function(book1, book2){
-        //     if(book1.title.toUpperCase()<book2.title.toUpperCase()){
-        //         return 1;
-        //     }
-        //     else if(book1.title.toUpperCase()<book2.title.toUpperCase()){
-        //         return -1;
-        //     }
-        //     else{
-        //         return 0;
-        //     }
-
-        // });
-        listBook.sort(function (a,b){
-            if(a.Title.toUpperCase()<b.title.toUpperCase()){
-            return -1 };
-        })
-        
-
-    }
+   
 }
 
 // insert new row in html table
 function insertNewRecord() {
     var genreSelected = document.querySelector('input[name="fav_language"]:checked').value;
     var newBook = new Book(title.value, author.value, price.value, pub.value, language.value, genreSelected, email.value );
+    details.innerHTML = newBook.DetailOuvrage()
     StoredBooks.push(newBook);
     localStorage.setItem("listBook", JSON.stringify(StoredBooks));
+    tri()
     loadData();
+    
 }
 
+ //sort items
+    function tri(){
+        StoredBooks.sort(function(book1, book2){
+            if(book1.title.toUpperCase()>book2.title.toUpperCase()){
+                return 1;
+            }
+            else if(book1.title.toUpperCase()<book2.title.toUpperCase()){
+                return -1;
+            }
+            else{
+                return 0;
+            }
+
+        });
+
+
+        // listBook.sort(function(a,b){
+        //     if(a.title.toUpperCase()< b.title.toUpperCase()){
+        //     return -1 }
+        // })
+        
+
+    }
 
 // edit row
 function onEdit(td) {
-    selectedRow = td.parentElement.parentElement;
-    document.getElementById('title').value = selectedRow.cells[0].innerHTML;
-    document.getElementById('author').value = selectedRow.cells[1].innerHTML;
-    document.getElementById('price').value = selectedRow.cells[2].innerHTML;
-    document.getElementById('pub').value = selectedRow.cells[3].innerHTML;
-    document.getElementById('language').value = selectedRow.cells[4].innerHTML;
-    document.querySelectorAll('genre').value = selectedRow.cells[5].innerHTML;
-    document.getElementById('email').value = selectedRow.cells[6].innerHTML;
+    selectedRow = td.parentElement.parentElement.rowIndex;
+    var row = document.getElementsByTagName("table")[0].rows[selectedRow];
+    document.getElementById("title").value = row.cells[0].innerHTML;
+    document.getElementById("author").value = row.cells[1].innerHTML;
+    document.getElementById("price").value = row.cells[2].innerHTML;
+    document.getElementById("pub").value = row.cells[3].innerHTML;
+    document.getElementById("language").value = row.cells[4].innerHTML;
+    document.querySelectorAll("genre").value = row.cells[5].innerHTML;
+    document.getElementById("email").value = row.cells[6].innerHTML;
 }
 
 // update row
@@ -316,6 +329,17 @@ form.addEventListener('submit', (e) => {
 
 
 // on print button click
-pr.addEventListener('click', function() {
-    window.print(), id='="noPrint"'
+// pr.addEventListener('click', function() {
+//     window.print(), id='="noPrint"'
+// })
+
+
+pr.addEventListener('click',function printData()
+{
+  var div = document.getElementById("table");
+  newwin = window.open("")
+  newwin.document.write(div.outerHTML);
+  newwin.print();
+  newwin.close();
+  
 })

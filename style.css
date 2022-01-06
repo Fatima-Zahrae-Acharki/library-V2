@@ -213,7 +213,7 @@ td{
 table{
     display: grid;
     /* align-self: center;  */
-    width: 80%;
+    width: 100%;
     justify-self: center;
     /* border: 1px solid #000; */
     border-radius: 45px  45px 0px   0px;
@@ -289,7 +289,7 @@ button{
     display: grid;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 
     
     
@@ -307,4 +307,9 @@ button{
     transform: translatex(8px)   translateY(9px);
     /* transition: 6ms; */
     
+}
+
+#details{
+    text-align: center;
+
 }

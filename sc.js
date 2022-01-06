@@ -275,7 +275,11 @@ function onEdit(td) {
     document.getElementById("price").value = row.cells[2].innerHTML;
     document.getElementById("pub").value = row.cells[3].innerHTML;
     document.getElementById("language").value = row.cells[4].innerHTML;
-    document.querySelectorAll("genre").value = row.cells[5].innerHTML;
+    //document.querySelectorAll("genre").value = row.cells[5].innerHTML;
+    for(var i=0; i<genre.length; i++) {
+        if(genre[i].value == row.cells[5].innerHTML)
+            genre[i].checked = true;
+    }
     document.getElementById("email").value = row.cells[6].innerHTML;
 }
 
@@ -283,13 +287,18 @@ function onEdit(td) {
 function updateRecord(formData) {
     // update directement dans la ligne de la table HTML 
     // !!!!!!!! faire un update au niveau de StoredBooks
-    selectedRow.cells[0].innerHTML = formData.title;
-    selectedRow.cells[1].innerHTML = formData.author;
-    selectedRow.cells[2].innerHTML = formData.price;
-    selectedRow.cells[3].innerHTML = formData.pub;
-    selectedRow.cells[4].innerHTML = formData.language;
-    selectedRow.cells[5].innerHTML = formData.genre;
-    selectedRow.cells[6].innerHTML = formData.email;
+    var rowToEdit = tbody.rows[selectedRow-1];
+    rowToEdit.cells[0].innerHTML = formData.title;
+    rowToEdit.cells[1].innerHTML = formData.author;
+    rowToEdit.cells[2].innerHTML = formData.price;
+    rowToEdit.cells[3].innerHTML = formData.pub;
+    rowToEdit.cells[4].innerHTML = formData.language;
+    rowToEdit.cells[5].innerHTML = formData.genre;
+    rowToEdit.cells[6].innerHTML = formData.email;
+    tri();
+    localStorage.setItem("listBook", JSON.stringify(StoredBooks))
+    loadData();
+    
 }
 
 // when u want to delete ur infos

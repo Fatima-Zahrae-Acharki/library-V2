@@ -281,6 +281,15 @@ function onEdit(td) {
             genre[i].checked = true;
     }
     document.getElementById("email").value = row.cells[6].innerHTML;
+
+    // tbody.innerHTML = ""
+    tri();
+    loadData();
+    // resetForm();
+    
+    
+
+
 }
 
 // update row
@@ -295,9 +304,22 @@ function updateRecord(formData) {
     rowToEdit.cells[4].innerHTML = formData.language;
     rowToEdit.cells[5].innerHTML = formData.genre;
     rowToEdit.cells[6].innerHTML = formData.email;
-    tri();
+
+
+    StoredBooks[selectedRow-1].title = title.value;
+    StoredBooks[selectedRow-1].author = author.value;
+    StoredBooks[selectedRow-1].price = price.value;
+    StoredBooks[selectedRow-1].pub = pub.value;
+    StoredBooks[selectedRow-1].language = language.value;
+    for(var i=0; i<genre.length; i++) {
+        if(genre[i].value == rowToEdit.cells[5].innerHTML)
+            genre[i].checked = true;
+    }
+    StoredBooks[selectedRow-1].email = email.value;
+
     localStorage.setItem("listBook", JSON.stringify(StoredBooks))
-    loadData();
+
+    
     
 }
 
@@ -312,7 +334,7 @@ function onDelete(td) {
 
         
     }
-    //resetForm();
+    
 
 
     
